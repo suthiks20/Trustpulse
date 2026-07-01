@@ -1,0 +1,12 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+sqlalchemy==2.0.36
+python-multipart==0.0.20
+mediapipe==0.10.21
+facenet-pytorch==2.6.0
+torch==2.2.2
+torchvision==0.17.2
+numpy==1.26.4
+opencv-python==4.10.0.84
+pillow>=10.2.0,<10.3.0
+python-Levenshtein==0.26.1

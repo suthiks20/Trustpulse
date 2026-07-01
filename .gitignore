@@ -1,0 +1,10 @@
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/trustpulse.db
+data/enrolled_faces/*
+!data/enrolled_faces/.gitkeep
+dashboard/node_modules/
+dashboard/dist/
+*.pyc
+.env
