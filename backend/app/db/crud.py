@@ -52,6 +52,10 @@ def get_auth_logs(db: OrmSession, limit: int = 20) -> list[AuthLog]:
     return db.query(AuthLog).order_by(desc(AuthLog.timestamp)).limit(limit).all()
 
 
+def get_auth_logs_for_card(db: OrmSession, card_id: str) -> list[AuthLog]:
+    return db.query(AuthLog).filter(AuthLog.card_id == card_id).order_by(desc(AuthLog.timestamp)).all()
+
+
 def create_session(db: OrmSession, session_id: str, card_id: str) -> Session:
     session = Session(session_id=session_id, card_id=card_id, trust_score=100.0)
     db.add(session)
@@ -66,6 +70,10 @@ def get_session(db: OrmSession, session_id: str) -> Session | None:
 
 def get_all_sessions(db: OrmSession) -> list[Session]:
     return db.query(Session).order_by(desc(Session.issued_at)).all()
+
+
+def get_sessions_for_card(db: OrmSession, card_id: str) -> list[Session]:
+    return db.query(Session).filter(Session.card_id == card_id).order_by(desc(Session.issued_at)).all()
 
 
 def update_session_heartbeat(db: OrmSession, session: Session, trust_score: float) -> Session:
@@ -120,6 +128,16 @@ def get_trust_events(db: OrmSession, session_id: str) -> list[TrustEvent]:
     return (
         db.query(TrustEvent)
         .filter(TrustEvent.session_id == session_id)
+        .order_by(TrustEvent.timestamp)
+        .all()
+    )
+
+
+def get_trust_events_for_card(db: OrmSession, card_id: str) -> list[TrustEvent]:
+    return (
+        db.query(TrustEvent)
+        .join(Session, TrustEvent.session_id == Session.session_id)
+        .filter(Session.card_id == card_id)
         .order_by(TrustEvent.timestamp)
         .all()
     )

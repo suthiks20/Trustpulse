@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8001";
+const BASE_URL = "http://localhost:8000";
 
 async function handle(res) {
   if (!res.ok) {
@@ -74,5 +74,10 @@ export async function getAuthLogs(limit = 20) {
 
 export async function getRiskChecks(limit = 20) {
   const res = await fetch(`${BASE_URL}/dashboard/risk-checks?limit=${limit}`);
+  return handle(res);
+}
+
+export async function getCardHistory(cardId) {
+  const res = await fetch(`${BASE_URL}/dashboard/cards/${cardId}/history`);
   return handle(res);
 }

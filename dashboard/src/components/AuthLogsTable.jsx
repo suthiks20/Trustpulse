@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { getAuthLogs } from "../api";
 
-export default function AuthLogsTable({ refreshKey }) {
-  const [logs, setLogs] = useState([]);
+export default function AuthLogsTable({ refreshKey, data }) {
+  const [fetched, setFetched] = useState([]);
+  const logs = data ?? fetched;
 
   useEffect(() => {
-    getAuthLogs(20).then(setLogs).catch(() => setLogs([]));
-  }, [refreshKey]);
+    if (data) return;
+    getAuthLogs(20).then(setFetched).catch(() => setFetched([]));
+  }, [refreshKey, data]);
 
   return (
     <div className="bg-white rounded-lg shadow p-4">

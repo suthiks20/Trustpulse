@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { getSessions } from "../api";
 
-export default function SessionHistoryTable({ selectedSessionId, onSelect, refreshKey }) {
-  const [sessions, setSessions] = useState([]);
+export default function SessionHistoryTable({ selectedSessionId, onSelect, refreshKey, data }) {
+  const [fetched, setFetched] = useState([]);
+  const sessions = data ?? fetched;
 
   useEffect(() => {
-    getSessions().then(setSessions).catch(() => setSessions([]));
-  }, [refreshKey]);
+    if (data) return;
+    getSessions().then(setFetched).catch(() => setFetched([]));
+  }, [refreshKey, data]);
 
   return (
     <div className="bg-white rounded-lg shadow p-4">

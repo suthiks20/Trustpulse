@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { getSessionHistory } from "../api";
 
-export default function TrustTimelineReport({ sessionId, refreshKey }) {
-  const [events, setEvents] = useState([]);
+export default function TrustTimelineReport({ sessionId, refreshKey, data, title }) {
+  const [fetched, setFetched] = useState([]);
+  const events = data ?? fetched;
 
   useEffect(() => {
-    if (!sessionId) return;
-    getSessionHistory(sessionId).then(setEvents).catch(() => setEvents([]));
-  }, [sessionId, refreshKey]);
+    if (data || !sessionId) return;
+    getSessionHistory(sessionId).then(setFetched).catch(() => setFetched([]));
+  }, [sessionId, refreshKey, data]);
 
-  if (!sessionId) {
+  if (!data && !sessionId) {
     return (
       <div className="bg-white rounded-lg shadow p-4 text-slate-500 text-sm">
         Select a session to view its trust timeline report.
@@ -19,7 +20,7 @@ export default function TrustTimelineReport({ sessionId, refreshKey }) {
 
   return (
     <div className="bg-white rounded-lg shadow p-4">
-      <h2 className="text-lg font-semibold text-slate-800 mb-2">Session Trust Timeline</h2>
+      <h2 className="text-lg font-semibold text-slate-800 mb-2">{title || "Session Trust Timeline"}</h2>
       <ul className="text-sm text-slate-700 flex flex-col gap-1 max-h-80 overflow-y-auto">
         {events.map((e) => (
           <li key={e.event_id} className="border-b last:border-0 py-1">

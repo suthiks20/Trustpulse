@@ -23,6 +23,57 @@ async def dashboard_cards(db: Session = Depends(get_db)):
     ]
 
 
+@router.get("/dashboard/cards/{card_id}/history")
+async def dashboard_card_history(card_id: str, db: Session = Depends(get_db)):
+    card = crud.get_demo_card(db, card_id)
+    if card is None:
+        raise HTTPException(status_code=404, detail="Unknown card_id")
+
+    sessions = crud.get_sessions_for_card(db, card_id)
+    auth_logs = crud.get_auth_logs_for_card(db, card_id)
+    trust_events = crud.get_trust_events_for_card(db, card_id)
+
+    return {
+        "card_id": card_id,
+        "name": card.name,
+        "sessions": [
+            {
+                "session_id": s.session_id,
+                "card_id": s.card_id,
+                "issued_at": s.issued_at,
+                "last_heartbeat": s.last_heartbeat,
+                "trust_score": s.trust_score,
+                "expired": is_session_expired(s),
+            }
+            for s in sessions
+        ],
+        "auth_logs": [
+            {
+                "log_id": log.log_id,
+                "card_id": log.card_id,
+                "timestamp": log.timestamp,
+                "match_score": log.match_score,
+                "liveness_passed": log.liveness_passed,
+                "result": log.result,
+            }
+            for log in auth_logs
+        ],
+        "trust_events": [
+            {
+                "event_id": e.event_id,
+                "session_id": e.session_id,
+                "timestamp": e.timestamp,
+                "signal_type": e.signal_type,
+                "signal_value": e.signal_value,
+                "resulting_score": e.resulting_score,
+                "reason_code": e.reason_code,
+                "explanation": explain(e.reason_code),
+            }
+            for e in trust_events
+        ],
+    }
+
+
 @router.get("/dashboard/sessions")
 async def dashboard_sessions(db: Session = Depends(get_db)):
     sessions = crud.get_all_sessions(db)
