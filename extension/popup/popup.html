@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>TrustPulse</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <h1>TrustPulse</h1>
+      <button id="options-btn" title="Options">⚙</button>
+    </header>
+
+    <section id="active-session" class="hidden">
+      <div class="score-row">
+        <div id="score-badge" class="score-badge">--</div>
+        <div>
+          <div class="label">Trust score</div>
+          <div id="flag-text" class="flag-text">--</div>
+        </div>
+      </div>
+      <div id="warning-banner" class="warning-banner hidden"></div>
+      <div class="field"><span class="label">Card</span> <span id="active-card-id"></span></div>
+      <button id="end-session-btn" class="secondary">End session</button>
+    </section>
+
+    <section id="no-session">
+      <p class="blurb">
+        Camera capture opens in its own window — this keeps Chrome's permission
+        prompt reliable instead of dismissing it when this popup loses focus.
+      </p>
+      <button id="open-login-btn" class="primary" disabled>Login with camera</button>
+      <button id="open-enroll-btn" class="secondary" disabled>Enroll a new card</button>
+      <div id="status-message" class="status"></div>
+    </section>
+
+    <div id="risk-dialog-overlay" class="dialog-overlay hidden">
+      <div class="dialog" role="alertdialog" aria-labelledby="risk-dialog-title">
+        <h2 id="risk-dialog-title">⚠ This site looks risky</h2>
+        <p class="dialog-score">Risk score: <span id="risk-dialog-score">--</span>/100</p>
+        <p id="risk-dialog-reason" class="dialog-reason"></p>
+        <div class="dialog-actions">
+          <button id="risk-cancel-btn" class="secondary">Cancel</button>
+          <button id="risk-proceed-btn" class="danger">Proceed anyway</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>

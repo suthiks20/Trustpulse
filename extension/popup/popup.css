@@ -1,0 +1,184 @@
+body {
+  width: 300px;
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 12px;
+  color: #111827;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 16px;
+  margin: 0;
+}
+
+#options-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.score-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  background: #6b7280;
+}
+
+.score-badge.green {
+  background: #16a34a;
+}
+
+.score-badge.amber {
+  background: #d97706;
+}
+
+.score-badge.red {
+  background: #dc2626;
+}
+
+.label {
+  font-size: 11px;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.flag-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.warning-banner {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.field {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.blurb {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0 0 12px;
+}
+
+button {
+  cursor: pointer;
+}
+
+button.primary,
+button.secondary {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+button.primary {
+  border: none;
+  background: #111827;
+  color: white;
+}
+
+button.secondary {
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #111827;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status {
+  margin-top: 8px;
+  font-size: 12px;
+  min-height: 14px;
+}
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.dialog {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.dialog h2 {
+  font-size: 15px;
+  margin: 0 0 8px;
+  color: #92400e;
+}
+
+.dialog-score {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.dialog-reason {
+  font-size: 12px;
+  color: #374151;
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.dialog-actions button {
+  margin-bottom: 0;
+}
+
+button.danger {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #dc2626;
+  color: white;
+  font-size: 13px;
+}

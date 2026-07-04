@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { getCards, sessionStart, verify } from "../api";
+import { sessionStart } from "../api/sessionApi";
+import { verify } from "../api/verifyApi";
 import { useWebcamCapture } from "../hooks/useWebcamCapture";
 
 export default function LoginPage({ onLogin }) {
@@ -39,10 +40,8 @@ export default function LoginPage({ onLogin }) {
       }
 
       const session = await sessionStart(trimmed);
-      const cards = await getCards();
-      const card = cards.find((c) => c.card_id === trimmed);
 
-      onLogin({ cardId: trimmed, sessionId: session.session_id, name: card?.name || trimmed });
+      onLogin({ cardId: trimmed, sessionId: session.session_id, name: session.card_name || trimmed });
       navigate("/bank");
     } catch (err) {
       setErrorMsg(err.message);

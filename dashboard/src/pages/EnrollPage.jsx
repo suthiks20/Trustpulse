@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { enroll } from "../api";
+import { enroll } from "../api/enrollApi";
 import { useWebcamCapture } from "../hooks/useWebcamCapture";
 
 function validateDob(dob) {

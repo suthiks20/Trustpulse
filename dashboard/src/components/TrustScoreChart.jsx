@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { getSessionHistory } from "../api";
+import { getSessionTrustEvents } from "../api/trustApi";
 
 export default function TrustScoreChart({ sessionId, refreshKey }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     if (!sessionId) return;
-    getSessionHistory(sessionId)
+    getSessionTrustEvents(sessionId)
       .then((events) =>
         setData(
           events.map((e) => ({

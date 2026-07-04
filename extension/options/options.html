@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>TrustPulse Options</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 480px; margin: 40px auto; color: #111827; }
+      h1 { font-size: 18px; }
+      section { margin-bottom: 24px; }
+      label { display: block; font-size: 13px; margin-bottom: 6px; font-weight: 600; }
+      input { padding: 6px; border: 1px solid #d1d5db; border-radius: 6px; width: 100%; box-sizing: border-box; }
+      ul { list-style: none; padding: 0; }
+      li { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f3f4f6; }
+      button { cursor: pointer; border-radius: 6px; border: 1px solid #d1d5db; background: white; padding: 6px 10px; }
+      .add-row { display: flex; gap: 8px; margin-top: 8px; }
+      .add-row input { flex: 1; }
+      .status { font-size: 12px; color: #16a34a; margin-top: 8px; }
+    </style>
+  </head>
+  <body>
+    <h1>TrustPulse settings</h1>
+
+    <section>
+      <label for="interval">Re-verify interval (minutes)</label>
+      <input id="interval" type="number" min="1" max="60" step="1" />
+    </section>
+
+    <section>
+      <label>Protected sites</label>
+      <ul id="site-list"></ul>
+      <div class="add-row">
+        <input id="new-site" placeholder="https://example.com" />
+        <button id="add-site-btn">Add</button>
+      </div>
+    </section>
+
+    <section>
+      <label>Current session</label>
+      <div id="session-info">No active session.</div>
+      <button id="revoke-btn">Revoke session</button>
+    </section>
+
+    <div id="status" class="status"></div>
+
+    <script src="options.js" type="module"></script>
+  </body>
+</html>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSessionHistory } from "../api";
+import { getSessionTrustEvents } from "../api/trustApi";
 
 export default function TrustTimelineReport({ sessionId, refreshKey, data, title }) {
   const [fetched, setFetched] = useState([]);
@@ -7,7 +7,7 @@ export default function TrustTimelineReport({ sessionId, refreshKey, data, title
 
   useEffect(() => {
     if (data || !sessionId) return;
-    getSessionHistory(sessionId).then(setFetched).catch(() => setFetched([]));
+    getSessionTrustEvents(sessionId).then(setFetched).catch(() => setFetched([]));
   }, [sessionId, refreshKey, data]);
 
   if (!data && !sessionId) {

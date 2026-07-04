@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { riskCheck } from "../api";
+import { riskCheck } from "../api/riskApi";
 
 export default function RiskCheckPanel() {
   const [url, setUrl] = useState("");

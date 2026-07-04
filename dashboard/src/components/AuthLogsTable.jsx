@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAuthLogs } from "../api";
+import { getAuthLogs } from "../api/dashboardApi";
 
 export default function AuthLogsTable({ refreshKey, data }) {
   const [fetched, setFetched] = useState([]);

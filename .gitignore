@@ -2,9 +2,12 @@ backend/venv/
 backend/__pycache__/
 backend/**/__pycache__/
 backend/trustpulse.db
+backend/.pytest_cache/
 data/enrolled_faces/*
 !data/enrolled_faces/.gitkeep
 dashboard/node_modules/
 dashboard/dist/
+extension/node_modules/
+extension/src/config.js
 *.pyc
 .env

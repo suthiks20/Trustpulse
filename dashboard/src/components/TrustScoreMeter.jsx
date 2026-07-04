@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { sessionHeartbeat } from "../api";
+import { sessionHeartbeat } from "../api/sessionApi";
 
 function colorFor(score) {
   if (score > 70) return "#16a34a";

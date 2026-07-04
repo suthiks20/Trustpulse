@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getRiskChecks } from "../api";
+import { getRiskChecks } from "../api/dashboardApi";
 
 export default function SiteRiskTable({ refreshKey }) {
   const [checks, setChecks] = useState([]);
@@ -17,6 +17,7 @@ export default function SiteRiskTable({ refreshKey }) {
             <th className="py-1">URL</th>
             <th>SSL</th>
             <th>Risk</th>
+            <th>Proceeded despite warning?</th>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +31,11 @@ export default function SiteRiskTable({ refreshKey }) {
                 }
               >
                 {c.risk_score}
+              </td>
+              <td>
+                {c.proceeded_despite_warning === true && <span className="text-amber-600 font-medium">yes</span>}
+                {c.proceeded_despite_warning === false && <span className="text-slate-600">no (cancelled)</span>}
+                {c.proceeded_despite_warning == null && <span className="text-slate-400">—</span>}
               </td>
             </tr>
           ))}

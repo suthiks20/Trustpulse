@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSessions } from "../api";
+import { getSessions } from "../api/dashboardApi";
 
 export default function SessionHistoryTable({ selectedSessionId, onSelect, refreshKey, data }) {
   const [fetched, setFetched] = useState([]);
