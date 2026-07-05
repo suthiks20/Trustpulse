@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, Request, Response
+from pydantic import BaseModel
 
 from app.config import get_settings
 from app.modules.auth import handlers
@@ -10,6 +11,10 @@ from app.shared.schemas import ok
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 settings = get_settings()
+
+
+class RefreshRequest(BaseModel):
+    refresh_token: str | None = None
 
 
 def _set_auth_cookies(response: Response, access_token: str, refresh_token: str) -> None:
@@ -43,8 +48,12 @@ async def login(request: Request, payload: LoginRequest, response: Response):
 
 
 @router.post("/refresh")
-async def refresh(request: Request, response: Response):
-    refresh_token = request.cookies.get(REFRESH_COOKIE_NAME)
+async def refresh(request: Request, response: Response, payload: RefreshRequest = None):
+    refresh_token = None
+    if payload is not None:
+        refresh_token = payload.refresh_token
+    if not refresh_token:
+        refresh_token = request.cookies.get(REFRESH_COOKIE_NAME)
     if not refresh_token:
         raise UnauthorizedError("Missing refresh token")
     body, access_token = handlers.handle_refresh(refresh_token)

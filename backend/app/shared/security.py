@@ -47,7 +47,12 @@ def decode_token(token: str, expected_type: str) -> dict:
 
 
 async def get_current_admin(request: Request) -> str:
-    token = request.cookies.get(ACCESS_COOKIE_NAME)
+    token = None
+    auth_header = request.headers.get("Authorization")
+    if auth_header and auth_header.startswith("Bearer "):
+        token = auth_header.removeprefix("Bearer ").strip()
+    if not token:
+        token = request.cookies.get(ACCESS_COOKIE_NAME)
     if not token:
         raise UnauthorizedError("Not authenticated")
     payload = decode_token(token, "access")
