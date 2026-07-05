@@ -1,3 +1,12 @@
+---
+title: Trustpulse Backend
+emoji: 🌖
+colorFrom: pink
+colorTo: blue
+sdk: docker
+pinned: false
+---
+
 # TrustPulse
 
 TrustPulse is a continuous authentication platform: instead of checking
